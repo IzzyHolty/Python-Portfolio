@@ -14,7 +14,8 @@ width = 40
 height = 60
 velocity = 10
 boundary = 13
-
+isJump = False
+jumpCount = 10
 
 def keyPress():
     keys = pygame.key.get_pressed()
@@ -22,10 +23,20 @@ def keyPress():
         character_x -= velocity
     if keys[pygame.K_RIGHT] and character_x < screen_width + boundary:
         character_x += velocity
-    if keys[pygame.K_UP] and character_y > boundary:
-        character_y-= velocity
-    if keys[pygame.K_DOWN] and character_y < screen_height + boundary:
-        character_y += velocity
+    if not (isJump):
+        if keys[pygame.K_UP] and character_y > boundary:
+            character_y-= velocity
+        if keys[pygame.K_DOWN] and character_y < screen_height + boundary:
+            character_y += velocity
+        if keys[pygame.K_SPACE]:
+            isJump = True
+    else:
+        if jumpCount >= -10:
+            character_y -= (jumpCount ** 2) * 0.5
+            jumpCount -= 1
+        else:
+            isJump = False
+            jumpCount = 10
 
 def drawGame():
     window = pygame.display.set_mode((screen_width, screen_height))
@@ -38,7 +49,7 @@ def drawGame():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
-        keypress()
+        keyPress()
 
         window.fill((0,0,1))
         pygame.draw.circle(window, (pygame.Color('#e58124')), (character_x, character_y), 50, 50)
