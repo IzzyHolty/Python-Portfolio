@@ -46,7 +46,7 @@ while run:
             neg = 1
             if jumpCount < 10:
                 neg = -1
-            character_y -= (jumpCount ** 2) * 1 * neg
+            character_y -= (jumpCount ** 2) * 0.5 * neg
             jumpCount -= 1
         else:
             isJump = False
