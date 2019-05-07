@@ -1,5 +1,5 @@
 # Used this tutorial to help create this program https://www.youtube.com/watch?v=0wdRh7QVzbw
-# Made global variables local inside functions
+# Made global variables local inside functions so that functions are optimised and only decrypt needs to be called
 
 import random
 import sys
@@ -40,7 +40,6 @@ def decrypt(code, shiftNumber):
 userCode = getCode("What is the code? ")
 
 for i in range(0, 26):
-    shiftThatAlphabet(i)
     message = decrypt(userCode, i)
     print(message)
 
